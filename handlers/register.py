@@ -20,8 +20,8 @@ async def register(msg: Message, state: FSMContext):
         await msg.answer("Siz avval ro'yxatdan o'tmagansiz! Iltimos avval ro'yxatdan o'ting!!!")
         await state.set_state(UserState.full_name)
         await msg.answer("FullName kiriting:")
-    else:
-        await msg.answer("Siz ro'yxatdan o'tgansiz")
+    if user:
+        await msg.answer("/check Buyrug'ini yuboring")
 
 @router.message(UserState.full_name)
 async def get_fullname(msg: Message, state: FSMContext):
@@ -39,6 +39,8 @@ async def get_role(msg: Message, state: FSMContext):
     if data['role'] == "Student":
         await add_user(user_id=msg.from_user.id, full_name=fullname, is_student=True, is_teacher=False)
         await msg.answer(f"{msg.from_user.full_name} Welcome! You have been successfully registered.")
+        await msg.answer("/check Buyrug'ini yuboring")
     elif data["role"] == "Teacher":
         await add_user(user_id=msg.from_user.id, full_name=fullname, is_student=False, is_teacher=True)
         await msg.answer(f"{msg.from_user.full_name} Welcome! You have been successfully registered.")
+        await msg.answer("/check Buyrug'ini yuboring")
