@@ -15,7 +15,6 @@ class User(Model):
     def __str__(self):
         return self.full_name
 
-
 class Lesson(Model):
     id = fields.IntField(pk=True)
     title = fields.CharField(max_length=255)
