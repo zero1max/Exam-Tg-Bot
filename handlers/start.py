@@ -11,6 +11,6 @@ class UserState(StatesGroup):
 
 router = Router()
 
-@router.message(CommandStart())
-async def start_msg(msg: Message):
-    await msg.answer("Assalomu aleykum!")
+# @router.message(CommandStart())
+# async def start_msg(msg: Message):
+#     await msg.answer("Assalomu aleykum!")
