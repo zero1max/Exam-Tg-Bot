@@ -3,11 +3,14 @@ from tortoise import fields
 
 
 class User(Model):
-    id = fields.IntField(pk=True)
-    user_id = fields.IntField(unique=True)  # Telegram User ID
+    id = fields.IntField(pk=True)  # Auto-increment primary key
+    user_id = fields.BigIntField(unique=True)  # Telegram User ID
     full_name = fields.CharField(max_length=255)
     is_student = fields.BooleanField(default=False)
     is_teacher = fields.BooleanField(default=False)
+
+    class Meta:
+        table = "users"
 
     def __str__(self):
         return self.full_name

@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from models.user import User
 from keyboards.main import *
+from services.user import *
 
 class UserState(StatesGroup):
     role = State()  # O'qituvchi yoki O'quvchi tanlash
@@ -30,4 +31,14 @@ async def get_fullname(msg: Message, state: FSMContext):
 
 @router.message(UserState.role)
 async def get_role(msg: Message, state: FSMContext):
-    print(msg.text)
+    await state.update_data(role=msg.text)
+    
+    data = await state.get_data()
+    print(data)
+    fullname = data["full_name"]
+    if data['role'] == "Student":
+        await add_user(user_id=msg.from_user.id, full_name=fullname, is_student=True, is_teacher=False)
+        await msg.answer(f"{msg.from_user.full_name} Welcome! You have been successfully registered.")
+    elif data["role"] == "Teacher":
+        await add_user(user_id=msg.from_user.id, full_name=fullname, is_student=False, is_teacher=True)
+        await msg.answer(f"{msg.from_user.full_name} Welcome! You have been successfully registered.")
