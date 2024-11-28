@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from tortoise import Tortoise
 
-load_dotenv()
+load_dotenv('.env')
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 BOT_USERNAME = os.getenv('BOT_USERNAME')
@@ -13,7 +13,8 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 
 # postgres://postgres:qwerty123@localhost:5432/events
-DB_URL = f'postgres://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+DB_URL = f'postgres://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/examdb'
+print(DB_URL)
 
 DB_CONFIG = {
     "connections": {
